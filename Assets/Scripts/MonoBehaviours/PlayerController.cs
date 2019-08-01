@@ -1,4 +1,4 @@
-﻿#pragma warning disable 0649
+﻿    #pragma warning disable 0649
 
 using System.Collections;
 using System.Collections.Generic;
@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour
     public GameManager gameManager;
 
     public GameObject bullet;
+
+    public AudioClip jump; 
 
 
     private void Start()
@@ -152,6 +154,7 @@ public class PlayerController : MonoBehaviour
 
         if (InputManager.instance.GetKeyDown("jump"))
         {
+            AudioSource.PlayClipAtPoint(jump, transform.position); 
             bool isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
             if (isGround)
             {
@@ -231,6 +234,7 @@ public class PlayerController : MonoBehaviour
     {
 
         Instantiate(bullet, bulletSpawn.position, transform.rotation);
+        GetComponent<AudioSource>().Play();
 
         Debug.Log("Projectile Sent");
     }
